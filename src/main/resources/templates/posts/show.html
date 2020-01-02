@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:fd="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Display a jobPost</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+<!--Main Div-->
+<div id="mainDiv" class="container">
+    <!--    Card-->
+    <div style="margin-top: 3em;">
+        <div class="card">
+            <div class="card inner-card">
+                <div id="postColumn">
+                    <div class="align-self-center text-capitalize">
+                        <a th:href="@{'/jobPosts/' + ${jobPost.getId()}}">
+                        <span class="text-capitalize">
+                        <div class="jobPost-title" th:text="${jobPost.title.toLowerCase()}"></div>
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+                <p class="mt-1" th:utext="${#strings.replace(jobPost.description, newLineChar, '&lt;br /&gt;')}"
+                   style="max-height: 250px; overflow: auto;"></p>
+                <input type="hidden" name="id" th:value="${jobPost.id}">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

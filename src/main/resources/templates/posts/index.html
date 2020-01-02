@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show jobPosts</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        #card-deck img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<div id="mainNav" th:replace="fragments/navbar :: main-navbar"></div>
+<div id="mainDiv" class="container">
+
+    <div id="postList" >
+        <div id="postGrid">
+            <th:block th:each="jobPost : ${jobPosts}">
+                <div class="card">
+                    <a th:href="@{'/jobPosts/' + ${jobPost.getId()}}" style="color: black;">
+                        <div class="card-body d-flex flex-column">
+                            <div style="height:180px; overflow: hidden; margin: .5em;">
+                                <img class="card-img-top  " src="${jobPost.getPicture_url())}"
+                                     th:src="${jobPost.getPicture_url()}"
+                                     id="imgPicture" style="max-width: 359px; overflow: hidden"/>
+                            </div>
+                            <h5 class="card-title text-capitalize" th:text="${jobPost.title.toLowerCase()}"></h5>
+                            <p class="card-text"><span
+                                    th:text="${jobPost.body.substring(0, jobPost.body.indexOf('.')+1)}"></span>
+                            </p>
+                            <p class="card-text">
+                            <div th:if="${jobPost.getCategories().size() > 0}">
+                                <h4>Categories</h4>
+                                <th:block th:each="category : ${jobPost.categories}">
+                                    <div th:text="${category.getDescription()}"></div>
+                                </th:block>
+                            </div>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

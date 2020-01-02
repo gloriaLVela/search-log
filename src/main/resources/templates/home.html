@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+</head>
+<style>
+    #mainDiv {
+        background: url(/img/job-search.jpeg) no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<div id="mainDiv" style="margin-top: 1em; height: 100vh;">
+    <section class="container d-flex flex-column">
+        <div class="main-header d-flex flex-column " style="margin-top: 12em; border: solid 3px white;">
+            <h2 class="card-title mt-1 text-center improveReadAbility" style="font-size: 24pt; ">Job Search Club</h2>
+            <p style="font-size: 18pt" class="improveReadAbility text-center ">Find your path. <br>Join
+                today!</p>
+            <div class="nav-item text-center">
+                <a class="nav-link navlinktext text-center" href="/register"
+                   style="background-color: #FF2D32; color: white; font-size: larger; border-radius: 15px; width: 20vw; margin-right: auto; margin-left: auto; margin-bottom: 1em">Sign
+                    Up</a>
+            </div>
+
+
+        </div>
+    </section>
+
+</div>
+<div class="credit_photo">
+    <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+       href="https://unsplash.com/@kundeleknabiegunie?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+       target="_blank" rel="noopener noreferrer"
+       title="Download free do whatever you want high-resolution photos from Agnieszka Boeske"><span
+            style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                                                              style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                                                              viewBox="0 0 32 32"><title>unsplash-logo</title><path
+            d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+            style="display:inline-block;padding:2px 3px">Agnieszka Boeske</span></a>
+</div>
+</body>
+</html>

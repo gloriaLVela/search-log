@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="fragments/header :: main-header"/>
+    <title>POst Lists</title>
+</head>
+<body>
+<div th:replace="fragments/navbar :: main-navbar"></div>
+
+<div id="mainDiv" class="container" style="display: flex; flex-direction: column; align-content: flex-start">
+    <div class="page-title">Update your job Posts</div>
+    <!--List of jobPosts-->
+    <div id="postList">
+        <div th:each="jobPost : ${posts}">
+            <div class="card">
+                <div class="card-body">
+                    <!--                <div class="card inner-card">-->
+                    <div style="display: flex; justify-content: flex-start; width: 100%">
+                        <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 80%">
+                            <h5 class="card-title">
+                                <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
+                                    <div class=" text-capitalize"
+                                         th:text="${jobPost.title.toLowerCase()}"></div>
+                                </a>
+                            </h5>
+                            <div class="card-text">
+                                <p th:utext="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+                            </div>
+                        </div>
+                        <div id="buttons" style="display: flex; flex-direction: column; justify-content: space-between">
+                            <div style="margin: 1em;">
+                                <form th:action="'/posts/' + ${jobPost.id} + '/update'" method="get">
+                                    <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                                </form>
+                            </div>
+                            <div style="margin: 1em;">
+                                <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="jobPost">
+                                    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.split-lines').val().replace(/\n\r?/g, '<br />');
+</script>
+</body>
+</html>

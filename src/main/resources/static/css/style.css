@@ -1,0 +1,356 @@
+
+/*************************/
+/*        Tag type       */
+/*************************/
+
+/* unvisited link */
+a:link {
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+    text-decoration: none;
+}
+
+/* selected link */
+a:active {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h4 {
+    margin-top: 1em;
+}
+
+
+li {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin-right: 2em;
+}
+
+nav {
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+fieldset{
+    border: 1px solid darkgray;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    list-style: none;
+
+}
+
+/*************************/
+/*      Class type       */
+/*************************/
+.btn-delete {
+    width: 5em;
+}
+
+.card {
+    display: flex;
+    align-content: center;
+    padding: .25em;
+    margin: 1em;
+    /*height: 400px;*/
+    /*box-shadow: .2em .2em .2em .2em #888888;*/
+}
+
+.center-cropped {
+    width: 259px;
+    height: 180px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+ /*Set the image to fill its parent and make transparent*/
+.center-cropped img {
+    min-height: 100%;
+    min-width: 100%;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    /* IE 5-7 */
+    filter: alpha(opacity=0);
+    /* modern browsers */
+    opacity: 0;
+}
+.credit_photo {
+    position: absolute;
+    bottom: 2px;
+}
+.cropped {
+    object-fit: scale-down;
+    overflow: hidden;
+    max-height: 180px;
+    max-width: 359px;
+    /*border: 5px solid black;*/
+}
+
+.cropped img {
+    height: auto;
+    width: 359px;
+}
+.improveReadAbility {
+    color: white;
+    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+}
+
+.inner-card {
+    border-color: white;
+}
+/*.card-title {*/
+/*    !*color: #3F3C3C;*!*/
+/*    text-shadow: .1em .1em lightgrey;*/
+/*}*/
+
+/*.card-body{*/
+/*    color: #a8a660;*/
+/*}*/
+.jumbotronImg {
+    object-fit: none !important;
+    background-repeat: no-repeat !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  max-height: 300px;
+    /*object-position: center !important;*/
+}
+.lightgreen {
+    color: #dadfbc;
+}
+
+.orange {
+    color: #e88e01;
+}
+
+.post-title{
+    text-transform: capitalize;
+    font-size: 1.5em;
+}
+
+.page-title {
+    font-size: 2em;
+    text-align: center !important;
+    text-transform: capitalize;
+}
+
+.nav-link {
+color: #868e96;
+}
+
+.postDescription{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.section-title {
+    font-size: 1.75em;
+    margin-top: 1em;
+}
+
+.split-lines{}
+/*************************/
+/*      Element ID       */
+/*************************/
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#mainDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+#postList {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    /*justify-content: space-around;*/
+    overflow: auto;
+}
+
+#postGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: .1em;
+    overflow: auto;
+}
+
+/*******************************************/
+/* Small devices (tablets, 480px and less) */
+/*******************************************/
+
+@media screen and (max-width: 480px) {
+
+    form {
+        margin-bottom: 0;
+    }
+
+    .card {
+        display: flex;
+        align-content: center;
+        padding: .5em;
+        height: 100%;
+    }
+
+    .card-title {
+        color: #3F3C3C;
+        text-shadow: .1em .1em lightgrey;
+    }
+
+    .movie-poster {
+        display: none;
+    }
+
+    .movie-poster-update {
+        width: 75px;
+        max-width: 150px;
+        margin: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .movie-card {
+        width: 12em;
+        border: 2em;
+        margin-top: .5em;
+        margin-bottom: .25em;
+    }
+
+    #movie-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+
+    #right-pane {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-height: 100vh;
+        justify-content: space-around;
+        overflow: auto;
+    }
+}
+
+.img-container {
+    margin: auto;
+    text-align: center !important;
+
+}
+
+/********************************************/
+/*  Small devices (tablets, 600px and less) */
+/********************************************/
+
+@media screen and (max-width: 600px) {
+
+    form {
+        margin-bottom: 0;
+    }
+
+    #imgPictureShow {
+        height: auto;
+        width: 359px;
+    }
+
+    #postColumn{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: center;
+    }
+
+    .post-title{
+        text-transform: capitalize;
+        font-size: 1.2em;
+    }
+
+
+}
+
+/*******************************************/
+/* Medium devices (tablets, 600px and up) */
+/*******************************************/
+
+@media screen and (min-width: 601px) {
+    #imgPictureShow {
+        height: auto;
+        width: 359px;
+    }
+
+    #postColumn{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .post-title{
+        text-transform: capitalize;
+        font-size: 1.5em;
+    }
+}
+
+/*******************************************/
+/* Medium devices (tablets, 800px and up) */
+/*******************************************/
+
+@media screen and (min-width: 800px) {
+    #imgPictureShow {
+        height: auto;
+        width: 359px;
+    }
+
+    #postColumn{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .post-title{
+        text-transform: capitalize;
+        font-size: 2em;
+    }
+}
+
+/*************************************************/
+/* Large devices (large desktops, 1200px and up) */
+/*************************************************/
+
+@media screen and (min-width: 990px) {
+    #imgPictureShow {
+        height: auto;
+        width: 359px;
+    }
+    .post-title{
+        text-transform: capitalize;
+        font-size: 2em;
+    }
+
+    #postColumn{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+}

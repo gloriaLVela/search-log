@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show companies</title>
+    <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        #card-deck img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<div id="mainNav" th:replace="fragments/navbar :: main-navbar"></div>
+<div id="mainDiv" class="container">
+
+    <div id="postList" class="card-deck">
+        <div id="postGrid">
+            <th:block th:each="company : ${companies}">
+<!--                <div class="card">-->
+                    <a th:href="@{'/company/' + ${company.getId()}}" style="color: black;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-capitalize" th:text="${company.name.toLowerCase()}"></h5>
+                            <p class="card-text"><span
+                                    th:text="${company.information.substring(0, company.information.indexOf('.')+1)}"></span>
+                            </p>
+
+                            </p>
+                        </div>
+                    </a>
+<!--                </div>-->
+            </th:block>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
