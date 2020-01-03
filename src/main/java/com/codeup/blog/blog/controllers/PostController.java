@@ -35,24 +35,6 @@ public class PostController {
 
     }
 
-
-    @GetMapping("/showBlog/{id}")
-    public String listPosts(@PathVariable long id, Model viewModel) {
-        User selectedBlog = userDao.getOne(id);
-        List<JobPost> jobPosts = selectedBlog.getJobPosts();
-        viewModel.addAttribute("user", selectedBlog);
-        viewModel.addAttribute("posts", jobPosts);
-        return "posts/index";
-    }
-
-    @GetMapping("/posts")
-    public String index(Model viewModel) {
-        List<JobPost> jobPosts = postDao.findAll();
-//        viewModel.addAttribute("user", jobPosts.);
-        viewModel.addAttribute("posts", jobPosts);
-        return "posts/index";
-    }
-
     @GetMapping("/posts/{id}")
     public String show(@PathVariable long id, Model viewModel) {
         System.out.println("id = " + id);
