@@ -4,110 +4,153 @@
     <meta charset="UTF-8">
     <title>Update jobPosts</title>
     <th:block th:replace="fragments/header :: main-header"/>
+    <style>
+        #mainDiv {
+            background: url(/img/team-work.jpeg) no-repeat center center fixed;
+            background-color: white;
+            /*background-size: auto 100%;*/
+            background-repeat: no-repeat;
+            background-position: left top;
+        }
+    </style>
 </head>
 <body>
-<!--Navbar-->
-<div th:replace="fragments/navbar :: main-navbar"></div>
-<section class="container">
-    <div class="page-title">Update Post</div>
-    <!--    Main container-->
-    <div class="container">
-        <div class="card">
-            <form th:action="@{'/posts/' + ${post.id} + '/update'}" th:method="post" th:object="${post}" class="form-group">
-                <div class="container">
-                    <input type="hidden" th:field="*{id}" id="postId">
-                    <input type="hidden" th:field="${userId}" id="userId">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input id="title" name="title" th:field="${post.title}" class="form-control" placeholder="title"
-                                       maxlength="255"
-                                       th:required="required"/>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for="notified_date">Notified Date</label>
-                                <input id="notified_date" th:value="${post.getNotified_date()}" class="form-control"
-                                       placeholder="MM/dd/YYYY"
-                                       th:required="required"/>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <select class="form-control" id="company_id" name="company_id">
-                                <option value="">Select Companies</option>
-                                <option th:each="company : ${companies}"
-                                        th:value="${company.id}"
-                                        th:text="${company.name}+' : '+${company.name}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea id="description" th:field="${post.description}" class="form-control"
-                                          placeholder="description"
-                                          th:required="required"/>
-                            </div>
-                        </div>
-                    </div>
+<div id="mainDiv" style="display: flex; flex-direction: column;">
+    <div class="container" style="display: flex; justify-content: center; align-items: center;">
+        <div style="display: flex; flex-direction:column; justify-content: space-around; align-items: flex-start; height: 100vh; ">
+            <!--Navbar-->
+            <div th:replace="fragments/navbar :: main-navbar"></div>
+            <!--    Main container-->
+            <div style=" overflow: auto">
+                <div class="page-title improveReadAbility" style="margin-top: 3em;">Update Post</div>
+                <div class="card">
+                    <form th:action="@{'/posts/' + ${post.id} + '/update'}" th:method="post" th:object="${post}"
+                          class="form-group">
+                        <div class="card inner-card">
+                            <input type="hidden" th:field="*{id}" id="postId">
+                            <input type="hidden" th:field="${userId}" id="userId">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input id="title" name="title" th:field="${post.title}" class="form-control"
+                                               placeholder="title"
+                                               maxlength="255"
+                                               th:required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="company_id">Select company</label>
+                                    <select class="form-control" id="company_id" name="company_id">
+                                        <option value="">Select Companies</option>
+                                        <option th:each="company : ${companies}"
+                                                th:value="${company.id}"
+                                                th:text="${company.name}+' : '+${company.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="notified_date">Notified Date</label>
+                                        <input id="notified_date" th:value="${post.getNotified_date()}"
+                                               class="form-control"
+                                               placeholder="MM/dd/YYYY"
+                                               th:required="required"/>
+                                    </div>
+                                </div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="attendants">attendants</label>
-                                <textarea id="attendants" th:text="${post.getInterview_attendants()}"
-                                          class="form-control"
-                                          placeholder="interview attendants"
-                                          th:required="required"/>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="applied_date">Applied Date</label>
-                                <input id="applied_date" th:value="${post.getApplied_date()}" class="form-control"
-                                       placeholder="MM/dd/YYYY"
-                                       th:required="required"/>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea id="description" th:field="${post.description}" class="form-control"
+                                                  placeholder="description"
+                                                  th:required="required"/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="interview_date">Interview Date</label>
-                                <input id="interview_date" th:value="${post.getInterview_date()}" class="form-control"
-                                       placeholder="MM/dd/YYYY"
-                                       th:required="required"/>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="attendants">attendants</label>
+                                        <textarea id="attendants" th:text="${post.getInterview_attendants()}"
+                                                  class="form-control"
+                                                  placeholder="interview attendants"
+                                                  th:required="required"/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="timeline">Timeline</label>
-                                <textarea id="timeline" th:text="${post.getTimeline()}" class="form-control"
-                                          placeholder="timeline"
-                                          th:required="required"/>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="applied_date">Applied Date</label>
+                                        <input id="applied_date" th:value="${post.getApplied_date()}"
+                                               class="form-control"
+                                               placeholder="MM/dd/YYYY"
+                                               th:required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="interview_date">Interview Date</label>
+                                        <input id="interview_date" th:value="${post.getInterview_date()}"
+                                               class="form-control"
+                                               placeholder="MM/dd/YYYY"
+                                               th:required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="thank_you_sent">Thank you sent</label>
+                                        <input id="thank_you_sent" th:value="${post.getThank_you_sent()}"
+                                               class="form-control"
+                                               placeholder="MM/dd/YYYY"
+                                               th:required="required"/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="good_things">Good things</label>
-                                <textarea id="good_things" th:text="${post.getGood_things()}" class="form-control"
-                                          placeholder="body"
-                                          th:required="required"/>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="timeline">Timeline</label>
+                                        <textarea id="timeline" th:text="${post.getTimeline()}" class="form-control"
+                                                  placeholder="timeline"
+                                                  th:required="required"/>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="good_things">Notes</label>
+                                        <textarea id="good_things" th:text="${post.notes}" class="form-control"
+                                                  placeholder="body"
+                                                  th:required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <input class="btn btn-warning" type="submit" value="Update">
                         </div>
-                    </div>
-                    <input class="btn btn-warning" type="submit" value="Update">
+                    </form>
                 </div>
-            </form>
+            </div>
+
         </div>
     </div>
-</section>
+    <div style=" display: flex; flex-direction: row; justify-content: flex-start">
+        <div class="credit_photo ">
+            <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+               href="https://unsplash.com/@sloppyperfectionist?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+               target="_blank" rel="noopener noreferrer"
+               title="Download free do whatever you want high-resolution photos from Hans-Peter Gauster"><span
+                    style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                                                                      viewBox="0 0 32 32"><title>unsplash-logo</title><path
+                    d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+                    style="display:inline-block;padding:2px 3px">Hans-Peter Gauster</span></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -18,13 +18,16 @@ public class JobPost {
     private boolean active;
 
     @Column(columnDefinition = "TEXT")
+    private String post_url;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(columnDefinition = "TEXT")
     private String interview_attendants;
 
     @Column(columnDefinition = "TEXT")
-    private String good_things;
+    private String notes;
 
     @Column(columnDefinition = "TEXT")
     private String timeline;
@@ -37,6 +40,9 @@ public class JobPost {
 
     @Column(name="interview_date", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date interview_date;
+
+    @Column(name="thank_you_sent", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private Date thank_you_sent;
 
     @Column(name="timestamp", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date time_stamp;
@@ -53,27 +59,18 @@ public class JobPost {
 
     }
 
-    public JobPost(String title,
-                   boolean active,
-                   String description,
-                   String interview_attendants,
-                   String good_things,
-                   String timeline,
-                   Date applied_date,
-                   Date notified_date,
-                   Date interview_date,
-                   Date time_stamp,
-                   User user,
-                   Company company) {
+    public JobPost(String title, boolean active, String post_url, String description, String interview_attendants, String notes, String timeline, Date applied_date, Date notified_date, Date interview_date, Date thank_you_sent, Date time_stamp, User user, Company company) {
         this.title = title;
         this.active = active;
+        this.post_url = post_url;
         this.description = description;
         this.interview_attendants = interview_attendants;
-        this.good_things = good_things;
+        this.notes = notes;
         this.timeline = timeline;
         this.applied_date = applied_date;
         this.notified_date = notified_date;
         this.interview_date = interview_date;
+        this.thank_you_sent = thank_you_sent;
         this.time_stamp = time_stamp;
         this.user = user;
         this.company = company;
@@ -145,14 +142,13 @@ public class JobPost {
         this.interview_attendants = interview_attendants;
     }
 
-    public String getGood_things() {
-        return good_things;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setGood_things(String good_things) {
-        this.good_things = good_things;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
-
 
     public Date getApplied_date() {
         return applied_date;
@@ -192,6 +188,22 @@ public class JobPost {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public String getPost_url() {
+        return post_url;
+    }
+
+    public void setPost_url(String post_url) {
+        this.post_url = post_url;
+    }
+
+    public Date getThank_you_sent() {
+        return thank_you_sent;
+    }
+
+    public void setThank_you_sent(Date thank_you_sent) {
+        this.thank_you_sent = thank_you_sent;
     }
 }
 
