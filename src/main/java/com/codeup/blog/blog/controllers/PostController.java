@@ -64,6 +64,7 @@ public class PostController {
         newJobPost.setCompany(companyDao.getOne(company_id));
         newJobPost.setApplied_date(applied_date);
         newJobPost.setNotified_date(notified_date);
+        newJobPost.setActive(true);
         postDao.save(newJobPost);
         return "redirect:/myPosts";
     }
@@ -87,6 +88,7 @@ public class PostController {
         JobPost oldJobPost = postDao.getOne(id);
         oldJobPost.setTitle(title);
         oldJobPost.setDescription(description);
+        oldJobPost.setActive(true);
         postDao.save(oldJobPost);
         return "redirect:/myPosts";
     }
@@ -94,7 +96,9 @@ public class PostController {
     @PostMapping("/posts/{id}/delete")
     public String delete(@PathVariable long id) {
         JobPost currentJobPost = postDao.getOne(id);
-        postDao.deleteById(id);
+        currentJobPost.setActive(false);
+        postDao.save(currentJobPost);
+        //postDao.deleteById(id);
         return "redirect:/myPosts";
     }
 
