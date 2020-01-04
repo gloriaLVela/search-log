@@ -110,10 +110,11 @@ public class PostController {
     public String update(@PathVariable long id,
                          @RequestParam String title,
                          @RequestParam String description,
-                         @RequestParam String strApplied_date,
-                         @RequestParam String strInterview_date,
-                         @RequestParam String strNotified_date,
-                         @RequestParam String strThank_you_sent,
+                         @RequestParam String applied_date,
+                         @RequestParam String interview_date,
+                         @RequestParam String notified_date,
+                         @RequestParam String thank_you_sent,
+                         @RequestParam String check_status,
                          @RequestParam(name = "interview_attendants", required = false) String interview_attendants,
                          @RequestParam String notes,
                          @RequestParam String timeline
@@ -126,41 +127,52 @@ public class PostController {
         oldJobPost.setTitle(title);
         oldJobPost.setDescription(description);
 //        oldJobPost.setApplied_date(applied_date);
-        Date applied_date = null;
+        Date applied_date2 = null;
         try {
-            applied_date = new SimpleDateFormat("yyyy-mm-dd").parse(strApplied_date);
-            oldJobPost.setApplied_date(applied_date);
+            applied_date2 = new SimpleDateFormat("yyyy-mm-dd").parse(applied_date);
+            oldJobPost.setApplied_date(applied_date2);
         } catch (ParseException e) {
+            System.out.println("exception 1");
             e.printStackTrace();
         }
 
-        Date interview_date = null;
+        Date interview_date2 = null;
         try {
-            interview_date = new SimpleDateFormat("yyyy-mm-dd").parse(strInterview_date);
-            oldJobPost.setInterview_date(interview_date);
+            interview_date2 = new SimpleDateFormat("yyyy-mm-dd").parse(interview_date);
+            oldJobPost.setInterview_date(interview_date2);
         } catch (ParseException e) {
             e.printStackTrace();
+            System.out.println("exception 2");
         }
 
-        Date notified_date = null;
+        Date notified_date2 = null;
         try {
-            notified_date = new SimpleDateFormat("yyyy-mm-dd").parse(strNotified_date);
-            oldJobPost.setNotified_date(notified_date);
+            notified_date2 = new SimpleDateFormat("yyyy-mm-dd").parse(notified_date);
+            oldJobPost.setNotified_date(notified_date2);
         } catch (ParseException e) {
             e.printStackTrace();
+            System.out.println("exception 3");
         }
 
-        Date thank_you_sent = null;
+        Date thank_you_sent2 = null;
         try {
-            thank_you_sent = new SimpleDateFormat("yyyy-mm-dd").parse(strThank_you_sent);
-            oldJobPost.setThank_you_sent(thank_you_sent);
+            thank_you_sent2 = new SimpleDateFormat("yyyy-mm-dd").parse(thank_you_sent);
+            oldJobPost.setThank_you_sent(thank_you_sent2);
         } catch (ParseException e) {
             e.printStackTrace();
+            System.out.println("exception 4");
         }
 
-        if (interview_attendants != null) {
-            oldJobPost.setInterview_attendants(interview_attendants);
+        Date check_status2 = null;
+        try {
+            check_status2 = new SimpleDateFormat("yyyy-mm-dd").parse(check_status);
+            oldJobPost.setCheck_status(check_status2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("exception 5");
         }
+
+        oldJobPost.setInterview_attendants(interview_attendants);
         oldJobPost.setNotes(notes);
         oldJobPost.setTimeline(timeline);
         oldJobPost.setActive(true);

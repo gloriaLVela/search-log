@@ -48,7 +48,7 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label >Notified Date</label>
-                                            <div id="notified_date" th:text="${jobPost.getApplied_Date_String()}"></div>
+                                            <div id="notified_date" th:text="${jobPost.getNotified_Date_String()}"></div>
                                         </div>
                                     </div>
 
@@ -64,22 +64,28 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="applied_date">Applied Date</label>
                                             <div id="applied_date" th:text="${jobPost.getApplied_Date_String()}"></div>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="interview_date">Interview Date</label>
                                             <div id="interview_date" th:text="${jobPost.getInterview_Date_String()}"></div>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label for="thank_you_sent">Thank you sent</label>
                                             <div id="thank_you_sent" th:text="${jobPost.getThank_you_String()}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="check_status">Check Status</label>
+                                            <div id="check_status" th:text="${jobPost.getCheck_Status_String()}"></div>
                                         </div>
                                     </div>
                                 </div>

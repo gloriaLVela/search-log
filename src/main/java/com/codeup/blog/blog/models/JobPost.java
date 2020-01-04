@@ -51,6 +51,10 @@ public class JobPost {
     @Column(name="thank_you_sent", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date thank_you_sent;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="check_status", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private Date check_status;
+
     @Column(name="timestamp", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date time_stamp;
 
@@ -66,7 +70,7 @@ public class JobPost {
 
     }
 
-    public JobPost(String title, boolean active, String post_url, String description, String interview_attendants, String notes, String timeline, Date applied_date, Date notified_date, Date interview_date, Date thank_you_sent, Date time_stamp, User user, Company company) {
+    public JobPost(String title, boolean active, String post_url, String description, String interview_attendants, String notes, String timeline, Date applied_date, Date notified_date, Date interview_date, Date thank_you_sent, Date check_status, Date time_stamp, User user, Company company) {
         this.title = title;
         this.active = active;
         this.post_url = post_url;
@@ -78,6 +82,7 @@ public class JobPost {
         this.notified_date = notified_date;
         this.interview_date = interview_date;
         this.thank_you_sent = thank_you_sent;
+        this.check_status = check_status;
         this.time_stamp = time_stamp;
         this.user = user;
         this.company = company;
@@ -165,6 +170,21 @@ public class JobPost {
 
     public String getApplied_Date_String(){
         Date date = this.applied_date;
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = dateFormat.format(date);
+        return strDate;
+    }
+
+    public Date getCheck_status() {
+        return check_status;
+    }
+
+    public void setCheck_status(Date check_status) {
+        this.check_status = check_status;
+    }
+
+    public String getCheck_Status_String(){
+        Date date = this.check_status;
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = dateFormat.format(date);
         return strDate;

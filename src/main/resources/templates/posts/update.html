@@ -50,10 +50,10 @@
                                 <div class="col-4">
                                     <div class="form-group" data-provide="datepicker">
                                         <label for="strNotified_date">Notified Date</label>
-                                        <input id="strNotified_date"  th:value="${post.getApplied_Date_String()}"
+                                        <input id="strNotified_date"  th:field="${post.notified_date}"
                                                name="strNotified_date"
                                                class="form-control"
-                                               placeholder="MM/dd/YYYY"
+                                               type="date"
                                                th:required="required"/>
                                     </div>
                                 </div>
@@ -83,31 +83,42 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label for="strApplied_date">Applied Date</label>
-                                        <input id="strApplied_date" th:value="${post.getApplied_Date_String()}"
+                                        <input id="strApplied_date" th:field="${post.applied_date}"
                                                name="strApplied_date"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
                                                type="date"/>
                                     </div>
+
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label for="strInterview_date">Interview Date</label>
-                                        <input id="strInterview_date" th:value="${post.getInterview_Date_String()}"
+                                        <input id="strInterview_date" th:field="${post.interview_date}"
                                                name="strInterview_date"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
                                                type="date"/>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="form-group">
                                         <label for="strThank_you_sent">Thank you sent</label>
-                                        <input id="strThank_you_sent" th:value="${post.getThank_you_String()}"
+                                        <input id="strThank_you_sent" th:field="${post.thank_you_sent}"
                                                name="strThank_you_sent"
+                                               class="form-control"
+                                               placeholder="MM/dd/YYYY"
+                                               type="date"/>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="strCheck_Status">Check Status</label>
+                                        <input id="strCheck_Status" th:field="${post.check_status}"
+                                               name="strCheck_Status"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
                                                type="date"/>
