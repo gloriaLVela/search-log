@@ -5,42 +5,63 @@
     <title>Show jobPosts</title>
     <th:block th:replace="fragments/header :: main-header"/>
     <style>
-        #card-deck img {
-            object-fit: cover;
+        #mainDiv {
+            background: url(/img/post-list.jpeg) no-repeat center center fixed;
+            background-color: white;
+            /*background-size: auto 100%;*/
+            background-repeat: no-repeat;
+            background-position: left top;
         }
     </style>
 </head>
 
-<div id="mainNav" th:replace="fragments/navbar :: main-navbar"></div>
-<div id="mainDiv" class="container">
-
-    <div id="postList" >
-        <div id="postGrid">
-            <th:block th:each="jobPost : ${jobPosts}">
-                <div class="card">
-                    <a th:href="@{'/jobPosts/' + ${jobPost.getId()}}" style="color: black;">
-                        <div class="card-body d-flex flex-column">
-                            <div style="height:180px; overflow: hidden; margin: .5em;">
-                                <img class="card-img-top  " src="${jobPost.getPicture_url())}"
-                                     th:src="${jobPost.getPicture_url()}"
-                                     id="imgPicture" style="max-width: 359px; overflow: hidden"/>
+<div id="mainDiv" style="display: flex; flex-direction: column;">
+    <div class="container" style="display: flex; justify-content: center; align-items: center;">
+        <div style="display: flex; flex-direction:column; justify-content: space-around; align-items: flex-start; height: 100vh; ">
+            <!--Navbar-->
+            <div th:replace="fragments/navbar :: main-navbar"></div>
+            <!--    Main container-->
+            <div style=" overflow: auto">
+                <div class="page-title improveReadAbility" style="margin-top: 3em;">Post List</div>
+                <th:block th:each="jobPost : ${jobPosts}">
+                    <div class="card">
+                        <a th:href="@{'/jobPosts/' + ${jobPost.getId()}}" style="color: black;">
+                            <div class="card-body d-flex flex-column">
+                                <div style="height:180px; overflow: hidden; margin: .5em;">
+                                    <img class="card-img-top  " src="${jobPost.getPicture_url())}"
+                                         th:src="${jobPost.getPicture_url()}"
+                                         id="imgPicture" style="max-width: 359px; overflow: hidden"/>
+                                </div>
+                                <h5 class="card-title text-capitalize" th:text="${jobPost.title.toLowerCase()}"></h5>
+                                <p class="card-text"><span
+                                        th:text="${jobPost.body.substring(0, jobPost.body.indexOf('.')+1)}"></span>
+                                </p>
+                                <p class="card-text">
+                                <div th:if="${jobPost.getCategories().size() > 0}">
+                                    <h4>Categories</h4>
+                                    <th:block th:each="category : ${jobPost.categories}">
+                                        <div th:text="${category.getDescription()}"></div>
+                                    </th:block>
+                                </div>
+                                </p>
                             </div>
-                            <h5 class="card-title text-capitalize" th:text="${jobPost.title.toLowerCase()}"></h5>
-                            <p class="card-text"><span
-                                    th:text="${jobPost.body.substring(0, jobPost.body.indexOf('.')+1)}"></span>
-                            </p>
-                            <p class="card-text">
-                            <div th:if="${jobPost.getCategories().size() > 0}">
-                                <h4>Categories</h4>
-                                <th:block th:each="category : ${jobPost.categories}">
-                                    <div th:text="${category.getDescription()}"></div>
-                                </th:block>
-                            </div>
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </th:block>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+        <div style=" display: flex; flex-direction: row; justify-content: flex-start">
+            <div class="credit_photo ">
+                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                   href="https://unsplash.com/@sloppyperfectionist?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+                   target="_blank" rel="noopener noreferrer"
+                   title="Download free do whatever you want high-resolution photos from Hans-Peter Gauster"><span
+                        style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                          style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
+                                                                          viewBox="0 0 32 32"><title>unsplash-logo</title><path
+                        d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+                        style="display:inline-block;padding:2px 3px">Hans-Peter Gauster</span></a>
+            </div>
         </div>
     </div>
 </div>

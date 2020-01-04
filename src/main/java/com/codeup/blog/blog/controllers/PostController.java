@@ -35,24 +35,6 @@ public class PostController {
 
     }
 
-
-    @GetMapping("/showBlog/{id}")
-    public String listPosts(@PathVariable long id, Model viewModel) {
-        User selectedBlog = userDao.getOne(id);
-        List<JobPost> jobPosts = selectedBlog.getJobPosts();
-        viewModel.addAttribute("user", selectedBlog);
-        viewModel.addAttribute("posts", jobPosts);
-        return "posts/index";
-    }
-
-    @GetMapping("/posts")
-    public String index(Model viewModel) {
-        List<JobPost> jobPosts = postDao.findAll();
-//        viewModel.addAttribute("user", jobPosts.);
-        viewModel.addAttribute("posts", jobPosts);
-        return "posts/index";
-    }
-
     @GetMapping("/posts/{id}")
     public String show(@PathVariable long id, Model viewModel) {
         System.out.println("id = " + id);
@@ -74,15 +56,13 @@ public class PostController {
     public String create(@ModelAttribute JobPost newJobPost,
                          @RequestParam Long company_id,
                          @RequestParam Date applied_date,
-                         @RequestParam Date interview_date,
                          @RequestParam Date notified_date,
                          Model vModel) {
-        //System.out.println("create");
+        System.out.println("create");
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newJobPost.setUser(loggedUser);
         newJobPost.setCompany(companyDao.getOne(company_id));
         newJobPost.setApplied_date(applied_date);
-        newJobPost.setInterview_date(interview_date);
         newJobPost.setNotified_date(notified_date);
         postDao.save(newJobPost);
         return "redirect:/myPosts";

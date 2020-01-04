@@ -3,46 +3,88 @@
 
 <head>
     <th:block th:replace="fragments/header :: main-header"/>
-    <title>POst Lists</title>
+    <title>Post Lists</title>
+    <style>
+        #mainDiv {
+            background: url(/img/post-list.jpeg) no-repeat center center fixed;
+            object-fit: cover; /* Do not scale the image */
+            object-position: center; /* Center the image within the element */
+            background-size: cover;
+            /*background-color: white;*/
+            /*!*background-size: auto 100%;*!*/
+            /*background-repeat: no-repeat;*/
+            /*background-position: left top;*/
+            /*overflow: hidden;*/
+        }
+
+        /*#mainDiv img {*/
+        /*    min-height: 100%;*/
+        /*    min-width: 100%;*/
+        /*    !* IE 8 *!*/
+        /*    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";*/
+        /*    !* IE 5-7 *!*/
+        /*    filter: alpha(opacity=0);*/
+        /*    !* modern browsers *!*/
+        /*    opacity: 0;*/
+        /*}*/
+    </style>
 </head>
 <body>
-<div th:replace="fragments/navbar :: main-navbar"></div>
-
-<div id="mainDiv" class="container" style="display: flex; flex-direction: column; align-content: flex-start">
-    <div class="page-title">Update your job Posts</div>
-    <!--List of jobPosts-->
-    <div id="postList">
-        <div th:each="jobPost : ${posts}">
-            <div class="card">
-                <div class="card-body">
-                    <!--                <div class="card inner-card">-->
-                    <div style="display: flex; justify-content: flex-start; width: 100%">
-                        <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 80%">
-                            <h5 class="card-title">
-                                <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
-                                    <div class=" text-capitalize"
-                                         th:text="${jobPost.title.toLowerCase()}"></div>
-                                </a>
-                            </h5>
-                            <div class="card-text">
-                                <p th:utext="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+<div id="mainDiv" style="display: flex;  height: 100vh;">
+    <div class="container"
+         style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-between;">
+        <!--Navbar-->
+        <div th:replace="fragments/navbar :: main-navbar"></div>
+        <!--    Main container-->
+        <div style="width: 100%;">
+            <div class="page-title improveReadAbility" style="margin-top: 2em;">Post List</div>
+            <div th:each="jobPost : ${posts}" style="overflow: auto;">
+                <div class="card">
+                    <div class="card inner-card">
+                        <div style="display: flex; justify-content: flex-start; width: 100%">
+                            <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 80%">
+                                <h5 class="card-title">
+                                    <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
+                                        <div class=" text-capitalize"
+                                             th:text="${jobPost.title.toLowerCase()}"></div>
+                                    </a>
+                                </h5>
+                                <div class="card-text">
+                                    <p th:utext="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+                                </div>
                             </div>
-                        </div>
-                        <div id="buttons" style="display: flex; flex-direction: column; justify-content: space-between">
-                            <div style="margin: 1em;">
-                                <form th:action="'/posts/' + ${jobPost.id} + '/update'" method="get">
-                                    <input class="btn btn-warning btn-sm" type="submit" value="Update">
-                                </form>
-                            </div>
-                            <div style="margin: 1em;">
-                                <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="jobPost">
-                                    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
-                                </form>
+                            <div id="buttons"
+                                 style="display: flex; flex-direction: column; justify-content: space-between">
+                                <div style="margin: 1em;">
+                                    <form th:action="'/posts/' + ${jobPost.id} + '/update'" method="get">
+                                        <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                                    </form>
+                                </div>
+                                <div style="margin: 1em;">
+                                    <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="jobPost">
+                                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <!--    </div>-->
+        <!--    </div>-->
+    </div>
+    <div style=" background-color: #6f42c1; display: flex; flex-direction: row; justify-content: flex-start">
+        <div class="credit_photo ">
+            <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+               href="https://unsplash.com/@hope_house_press_leather_diary_studio?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+               target="_blank" rel="noopener noreferrer"
+               title="Download free do whatever you want high-resolution photos from Hope House Press - Leather Diary Studio"><span
+                    style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                      style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:#ffffff"
+                                                                      viewBox="0 0 32 32"><title>unsplash-logo</title><path
+                    d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+                    style="display:inline-block;padding:2px 3px">Hope House Press - Leather Diary Studio</span></a>
         </div>
     </div>
 </div>
