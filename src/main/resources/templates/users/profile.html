@@ -28,15 +28,62 @@
                     <div class="card inner-card">
                         <div style="display: flex; justify-content: flex-start; width: 100%">
                             <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 80%">
-                                <h5 class="card-title">
-                                    <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
+                                                <div class=" text-capitalize"
+                                                     th:text="${jobPost.title.toLowerCase()}"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Company</label>
                                         <div class=" text-capitalize"
-                                             th:text="${jobPost.title.toLowerCase()}"></div>
-                                    </a>
-                                </h5>
-                                <div class="card-text">
-                                    <p th:utext="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+                                             th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label >Notified Date</label>
+                                            <div id="notified_date" th:text="${jobPost.getApplied_Date_String()}"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <div class="card-text">
+                                                <p th:text="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="applied_date">Applied Date</label>
+                                            <div id="applied_date" th:text="${jobPost.getApplied_Date_String()}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="interview_date">Interview Date</label>
+                                            <div id="interview_date" th:text="${jobPost.getInterview_Date_String()}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="thank_you_sent">Thank you sent</label>
+                                            <div id="thank_you_sent" th:text="${jobPost.getThank_you_String()}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div id="buttons"
                                  style="display: flex; flex-direction: column; justify-content: space-between">

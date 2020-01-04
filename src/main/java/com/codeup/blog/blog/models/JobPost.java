@@ -1,7 +1,11 @@
 package com.codeup.blog.blog.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -31,15 +35,19 @@ public class JobPost {
     @Column(columnDefinition = "TEXT")
     private String timeline;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="applied_date", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date applied_date;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="notified_date", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date notified_date;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="interview_date", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date interview_date;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="thank_you_sent", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date thank_you_sent;
 
@@ -90,8 +98,6 @@ public class JobPost {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
 
     public com.codeup.blog.blog.models.User getUser() {
         return user;
@@ -157,6 +163,13 @@ public class JobPost {
         this.applied_date = applied_date;
     }
 
+    public String getApplied_Date_String(){
+        Date date = this.applied_date;
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = dateFormat.format(date);
+        return strDate;
+    }
+
     public Date getNotified_date() {
         return notified_date;
     }
@@ -165,12 +178,25 @@ public class JobPost {
         this.notified_date = notified_date;
     }
 
+    public String getNotified_Date_String(){
+        Date date = this.notified_date;
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = dateFormat.format(date);
+        return strDate;
+    }
     public Date getInterview_date() {
         return interview_date;
     }
 
     public void setInterview_date(Date interview_date) {
         this.interview_date = interview_date;
+    }
+
+    public String getInterview_Date_String(){
+        Date date = this.interview_date;
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = dateFormat.format(date);
+        return strDate;
     }
 
     public String getTimeline() {
@@ -203,6 +229,13 @@ public class JobPost {
 
     public void setThank_you_sent(Date thank_you_sent) {
         this.thank_you_sent = thank_you_sent;
+    }
+
+    public String getThank_you_String(){
+        Date date = this.thank_you_sent;
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = dateFormat.format(date);
+        return strDate;
     }
 }
 

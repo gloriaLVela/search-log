@@ -1,4 +1,5 @@
 package com.codeup.blog.blog.controllers;
+
 import com.codeup.blog.blog.models.Company;
 import com.codeup.blog.blog.models.JobPost;
 import com.codeup.blog.blog.models.User;
@@ -6,11 +7,18 @@ import com.codeup.blog.blog.repositories.CompanyRepository;
 import com.codeup.blog.blog.repositories.PostRepository;
 import com.codeup.blog.blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +54,7 @@ public class PostController {
     @GetMapping("/posts/create")
     public String showCreatePost(Model vModel) {
         vModel.addAttribute("post", new JobPost());
+//        vModel.addAttribute("applied_date", LocalDate.now());
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         vModel.addAttribute("userId", loggedUser.getId());
         vModel.addAttribute("companies", userDao.getOne(loggedUser.getId()).getCompanyList());
@@ -55,15 +64,32 @@ public class PostController {
     @PostMapping("/posts/create")
     public String create(@ModelAttribute JobPost newJobPost,
                          @RequestParam Long company_id,
-                         @RequestParam Date applied_date,
-                         @RequestParam Date notified_date,
+                         @RequestParam String strApplied_date,
+                         @RequestParam String strNotified_date,
                          Model vModel) {
-        System.out.println("create");
+//        System.out.println("create");
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newJobPost.setUser(loggedUser);
+//        System.out.println("company_id = " + company_id);
         newJobPost.setCompany(companyDao.getOne(company_id));
-        newJobPost.setApplied_date(applied_date);
-        newJobPost.setNotified_date(notified_date);
+//        System.out.println("strApplied_date = " + strApplied_date);
+        Date applied_date = null;
+        try {
+            applied_date = new SimpleDateFormat("yyyy-mm-dd").parse(strApplied_date);
+            newJobPost.setApplied_date(applied_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        Date notified_date = null;
+        try {
+            notified_date = new SimpleDateFormat("yyyy-mm-dd").parse(strNotified_date);
+            newJobPost.setNotified_date(notified_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        newJobPost.setTime_stamp(new Date());
         newJobPost.setActive(true);
         postDao.save(newJobPost);
         return "redirect:/myPosts";
@@ -72,7 +98,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}/update")
     public String updatePost(@PathVariable long id, Model viewModel) {
-         viewModel.addAttribute("post", postDao.getOne(id));
+        viewModel.addAttribute("post", postDao.getOne(id));
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         viewModel.addAttribute("userId", loggedUser.getId());
         viewModel.addAttribute("companies", userDao.getOne(loggedUser.getId()).getCompanyList());
@@ -83,11 +109,60 @@ public class PostController {
     @PostMapping("/posts/{id}/update")
     public String update(@PathVariable long id,
                          @RequestParam String title,
-                         @RequestParam String description) {
-        System.out.println("update post");
+                         @RequestParam String description,
+                         @RequestParam String strApplied_date,
+                         @RequestParam String strInterview_date,
+                         @RequestParam String strNotified_date,
+                         @RequestParam String strThank_you_sent,
+                         @RequestParam(name = "interview_attendants", required = false) String interview_attendants,
+                         @RequestParam String notes,
+                         @RequestParam String timeline
+    ) {
+
+//        @RequestParam(name = "from", required = false, defaultValue = "10-10-2017") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate from,
+//        @RequestParam(name = "to", required = false, defaultValue = "10-10-2019") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate to
+//        System.out.println("update post");
         JobPost oldJobPost = postDao.getOne(id);
         oldJobPost.setTitle(title);
         oldJobPost.setDescription(description);
+//        oldJobPost.setApplied_date(applied_date);
+        Date applied_date = null;
+        try {
+            applied_date = new SimpleDateFormat("yyyy-mm-dd").parse(strApplied_date);
+            oldJobPost.setApplied_date(applied_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date interview_date = null;
+        try {
+            interview_date = new SimpleDateFormat("yyyy-mm-dd").parse(strInterview_date);
+            oldJobPost.setInterview_date(interview_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date notified_date = null;
+        try {
+            notified_date = new SimpleDateFormat("yyyy-mm-dd").parse(strNotified_date);
+            oldJobPost.setNotified_date(notified_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date thank_you_sent = null;
+        try {
+            thank_you_sent = new SimpleDateFormat("yyyy-mm-dd").parse(strThank_you_sent);
+            oldJobPost.setThank_you_sent(thank_you_sent);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (interview_attendants != null) {
+            oldJobPost.setInterview_attendants(interview_attendants);
+        }
+        oldJobPost.setNotes(notes);
+        oldJobPost.setTimeline(timeline);
         oldJobPost.setActive(true);
         postDao.save(oldJobPost);
         return "redirect:/myPosts";

@@ -48,9 +48,10 @@
                                     </select>
                                 </div>
                                 <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="notified_date">Notified Date</label>
-                                        <input id="notified_date" th:value="${post.getNotified_date()}"
+                                    <div class="form-group" data-provide="datepicker">
+                                        <label for="strNotified_date">Notified Date</label>
+                                        <input id="strNotified_date"  th:value="${post.getApplied_Date_String()}"
+                                               name="strNotified_date"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
                                                th:required="required"/>
@@ -63,6 +64,7 @@
                                     <div class="form-group">
                                         <label for="description">Description</label>
                                         <textarea id="description" th:field="${post.description}" class="form-control"
+                                                  name="description"
                                                   placeholder="description"
                                                   th:required="required"/>
                                     </div>
@@ -72,40 +74,43 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="attendants">attendants</label>
-                                        <textarea id="attendants" th:text="${post.getInterview_attendants()}"
+                                        <label for="strAttendants">attendants</label>
+                                        <textarea id="strAttendants" th:text="${post.getInterview_attendants()}"
+                                                  name="strAttendants"
                                                   class="form-control"
-                                                  placeholder="interview attendants"
-                                                  th:required="required"/>
+                                                  placeholder="interview attendants"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="applied_date">Applied Date</label>
-                                        <input id="applied_date" th:value="${post.getApplied_date()}"
+                                        <label for="strApplied_date">Applied Date</label>
+                                        <input id="strApplied_date" th:value="${post.getApplied_Date_String()}"
+                                               name="strApplied_date"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
-                                               th:required="required"/>
+                                               type="date"/>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="interview_date">Interview Date</label>
-                                        <input id="interview_date" th:value="${post.getInterview_date()}"
+                                        <label for="strInterview_date">Interview Date</label>
+                                        <input id="strInterview_date" th:value="${post.getInterview_Date_String()}"
+                                               name="strInterview_date"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
-                                               th:required="required"/>
+                                               type="date"/>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="thank_you_sent">Thank you sent</label>
-                                        <input id="thank_you_sent" th:value="${post.getThank_you_sent()}"
+                                        <label for="strThank_you_sent">Thank you sent</label>
+                                        <input id="strThank_you_sent" th:value="${post.getThank_you_String()}"
+                                               name="strThank_you_sent"
                                                class="form-control"
                                                placeholder="MM/dd/YYYY"
-                                               th:required="required"/>
+                                               type="date"/>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +119,7 @@
                                     <div class="form-group">
                                         <label for="timeline">Timeline</label>
                                         <textarea id="timeline" th:text="${post.getTimeline()}" class="form-control"
+                                                  name="timeline"
                                                   placeholder="timeline"
                                                   th:required="required"/>
                                     </div>
@@ -122,10 +128,10 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="good_things">Notes</label>
-                                        <textarea id="good_things" th:text="${post.notes}" class="form-control"
-                                                  placeholder="body"
-                                                  th:required="required"/>
+                                        <label for="notes">Notes</label>
+                                        <textarea id="notes" th:text="${post.notes}" class="form-control"
+                                                  name="notes"
+                                                  placeholder="notes"/>
                                     </div>
                                 </div>
                             </div>

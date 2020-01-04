@@ -45,17 +45,26 @@
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="notified_date">Notified Date</label>
-                                <input id="notified_date" th:field="*{notified_date}" class="form-control"
+                                <label for="strNotified_date">Notified Date</label>
+                                <input id="strNotified_date"
+                                       name="strNotified_date"
+                                       class="form-control"
                                        placeholder="MM/dd/YYYY"
+                                       type="date"
                                        th:required="required"/>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="applied_date">Applied Date</label>
-                                <input id="applied_date" th:field="*{applied_date}" class="form-control"
+<!--                                <label for="date"><h5>Enter the date you did not smoke?</h5></label>-->
+<!--                                <input type="date" name="date" id="date" class="mb-2 datePicker form-control " style="text-align: center;" required oninput="checkDate()">-->
+<!--                                <div id="invalidDate" class="">Opps! You have entered a date that has already been approved.</div>-->
+                                <label for="strApplied_date">Applied Date</label>
+                                <input id="strApplied_date"
+                                       name="strApplied_date"
+                                       class=" datePicker form-control"
                                        placeholder="MM/dd/YYYY"
+                                       type="date"
                                        th:required="required"/>
                             </div>
                         </div>
@@ -65,7 +74,7 @@
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea id="description" th:field="*{description}" class="form-control"
-                                          placeholder="body"
+                                          placeholder="job description"
                                           th:required="required"/>
                             </div>
                         </div>
