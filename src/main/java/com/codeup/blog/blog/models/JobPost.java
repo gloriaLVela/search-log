@@ -14,7 +14,6 @@ public class JobPost {
 
     private String title;
 
-
     private boolean active;
 
     @Column(columnDefinition = "TEXT")

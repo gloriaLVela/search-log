@@ -59,8 +59,13 @@ public class UserController {
 
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(loggedUser.toString());
-        List<JobPost> jobPosts = userDao.getOne(loggedUser.getId()).getJobPosts();
-        userDao.getOne(loggedUser.getId()).getJobPosts();
+        List<JobPost> jobPosts =  userDao.getOne(loggedUser.getId()).getJobPosts();
+        for(int index = jobPosts.size() - 1; index >= 0; index--){
+            if (jobPosts.get(index).isActive() == false){
+                jobPosts.remove(index);
+
+            }
+        }
         viewModel.addAttribute("user", userDao.getOne(loggedUser.getId()));
         viewModel.addAttribute("posts", jobPosts);
         viewModel.addAttribute("newLineChar", '\n');
