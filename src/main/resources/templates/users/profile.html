@@ -58,7 +58,7 @@
                                         <div class="form-group">
                                             <label>Description</label>
                                             <div class="card-text">
-                                                <p th:text="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+                                                <p th:text="${#strings.replace(jobPost.getDescription().substring(0, 500), newLineChar, '&lt;br /&gt;')}"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -73,19 +73,19 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="interview_date">Interview Date</label>
-                                            <div id="interview_date" th:text="${jobPost.getInterview_Date_String()}"></div>
+                                            <div id="interview_date" th:text="${jobPost.interview_date} ? ${jobPost.getInterview_Date_String()} : ' '"></div>
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="thank_you_sent">Thank you sent</label>
-                                            <div id="thank_you_sent" th:text="${jobPost.getThank_you_String()}"></div>
+                                            <div id="thank_you_sent" th:text="${jobPost.thank_you_sent} ?${jobPost.getThank_you_String()}:''"></div>
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="check_status">Check Status</label>
-                                            <div id="check_status" th:text="${jobPost.getCheck_Status_String()}"></div>
+                                            <div id="check_status" th:text="${jobPost.check_status}?${jobPost.getCheck_Status_String()}: ''"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                     </form>
                                 </div>
                                 <div style="margin: 1em;">
-                                    <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="jobPost">
+                                    <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="post">
                                         <input class="btn btn-danger btn-sm" type="submit" value="Delete">
                                     </form>
                                 </div>
