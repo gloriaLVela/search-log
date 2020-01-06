@@ -40,7 +40,7 @@
                                 <option value="">Select Companies</option>
                                 <option th:each="company : ${companies}"
                                         th:value="${company.id}"
-                                        th:text="${company.name}+' : '+${company.name}"></option>
+                                        th:text="${company.name}"></option>
                             </select>
                         </div>
                         <div class="col-3">

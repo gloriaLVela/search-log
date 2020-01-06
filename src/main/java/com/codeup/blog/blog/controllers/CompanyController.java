@@ -4,6 +4,7 @@ import com.codeup.blog.blog.models.Company;
 import com.codeup.blog.blog.models.JobPost;
 import com.codeup.blog.blog.models.User;
 import com.codeup.blog.blog.repositories.CompanyRepository;
+import com.codeup.blog.blog.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,14 +16,18 @@ import java.util.List;
 public class CompanyController {
 
     private final CompanyRepository companyDao;
+    private final UserRepository userDao;
 
-    public CompanyController(CompanyRepository companyDao) {
+    public CompanyController(CompanyRepository companyDao, UserRepository userDao) {
         this.companyDao = companyDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/companies")
     public String index(Model viewModel) {
-        List<Company> companyList = companyDao.findAll();
+        User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Company> companyList = userDao.getOne(loggedUser.getId()).getCompanyList();
 //        viewModel.addAttribute("user", jobPosts.);
         viewModel.addAttribute("companies", companyList);
         return "company/maintain-company";
