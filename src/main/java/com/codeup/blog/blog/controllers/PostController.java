@@ -99,6 +99,7 @@ public class PostController {
     @GetMapping("/posts/{id}/update")
     public String updatePost(@PathVariable long id, Model viewModel) {
         viewModel.addAttribute("post", postDao.getOne(id));
+        viewModel.addAttribute("selectedCompany", postDao.getOne(id).getCompany());
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         viewModel.addAttribute("userId", loggedUser.getId());
         viewModel.addAttribute("companies", userDao.getOne(loggedUser.getId()).getCompanyList());
@@ -110,6 +111,7 @@ public class PostController {
     public String update(@PathVariable long id,
                          @RequestParam String title,
                          @RequestParam String description,
+                         @RequestParam Long company_id,
                          @RequestParam String applied_date,
                          @RequestParam String interview_date,
                          @RequestParam String notified_date,
@@ -120,13 +122,10 @@ public class PostController {
                          @RequestParam String timeline
     ) {
 
-//        @RequestParam(name = "from", required = false, defaultValue = "10-10-2017") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate from,
-//        @RequestParam(name = "to", required = false, defaultValue = "10-10-2019") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate to
-//        System.out.println("update post");
         JobPost oldJobPost = postDao.getOne(id);
         oldJobPost.setTitle(title);
         oldJobPost.setDescription(description);
-//        oldJobPost.setApplied_date(applied_date);
+        oldJobPost.setCompany(companyDao.getOne(company_id));
         Date applied_date2 = null;
         try {
             applied_date2 = new SimpleDateFormat("yyyy-mm-dd").parse(applied_date);
