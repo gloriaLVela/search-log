@@ -65,8 +65,8 @@
                                                      th:text="${jobPost.getNotified_Date_String()}"></div>
                                             </div>
                                         </div>
-
                                     </div>
+
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
@@ -74,6 +74,15 @@
                                                 <div class="card-text" style="height: 50px; overflow: hidden">
                                                     <p th:text="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>Post url</label>
+                                                <a th:href="${jobPost.getPost_url()}" target="_blank"><span th:text="${jobPost.getPost_url()}"></span></a>
+<!--                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
