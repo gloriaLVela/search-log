@@ -59,9 +59,9 @@ public class UserController {
 
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(loggedUser.toString());
-        List<JobPost> jobPosts =  userDao.getOne(loggedUser.getId()).getJobPosts();
-        for(int index = jobPosts.size() - 1; index >= 0; index--){
-            if (jobPosts.get(index).isActive() == false){
+        List<JobPost> jobPosts = userDao.getOne(loggedUser.getId()).getJobPosts();
+        for (int index = jobPosts.size() - 1; index >= 0; index--) {
+            if (jobPosts.get(index).isActive() == false) {
                 jobPosts.remove(index);
 
             }
@@ -69,7 +69,7 @@ public class UserController {
         viewModel.addAttribute("user", userDao.getOne(loggedUser.getId()));
         viewModel.addAttribute("posts", jobPosts);
         viewModel.addAttribute("newLineChar", '\n');
-
+        viewModel.addAttribute("totalPost", jobPosts.size());
         return "users/profile";
     }
 

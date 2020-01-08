@@ -12,144 +12,167 @@
             background-size: cover;
         }
 
-         .footer {
-             position: fixed;
-             left: 0;
-             bottom: 0;
-             width: 100%;
-             /*background-color: red;*/
-             color: white;
-             text-align: left;
-         }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            /*background-color: red;*/
+            color: white;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
-<div id="mainDiv" style="display: flex;  height: 100%;">
-    <div
-            style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-between;">
-        <!--Navbar-->
-        <div id="mainNav" th:replace="fragments/navbar :: main-navbar"></div>
-        <div id="pageTitle" class="page-title improveReadAbility"
-             style="width:100%; margin-top: 2em; text-align: center !important;">
-            Post List
-        </div>
-        <!--    Main container-->
-        <div>
-            <div id="postList" style="width: 100%;  overflow:auto">
-                <th:block th:each="jobPost : ${posts}">
-                    <div class="card">
-                        <div class="card inner-card">
-                            <div style="display: flex; justify-content: flex-start; width: 100%">
-                                <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 80%">
+<!--Set the correct screen height-->
+<th:block th:if="${totalPost > 1}">
+    <div id="mainDiv" style="display: flex; height: 100%;">
+</th:block>
 
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label>Title</label>
-                                                <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
-                                                    <div class=" text-capitalize"
-                                                         th:text="${jobPost.title.toLowerCase()}"></div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>Company</label>
-                                            <div class=" text-capitalize"
-                                                 th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
+<th:block th:if="${totalPost <= 1}">
+    <div id="mainDiv" style="display: flex; height: 100vh;">
+</th:block>
 
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label>Notified Date</label>
-                                                <div id="notified_date"
-                                                     th:text="${jobPost.getNotified_Date_String()}"></div>
-                                            </div>
-                                        </div>
+<div
+        style="display: flex; flex-direction: column; align-items: flex-start;  justify-content:space-between;">
+    <!--Navbar-->
+    <div id="mainNav" th:replace="fragments/navbar :: main-navbar"></div>
+    <div id="pageTitle" class="page-title improveReadAbility"
+         style="width:100%; margin-top: 2em; text-align: center !important;">
+        Post List
+    </div>
+    <!--    Main container-->
+    <div>
+        <div id="postList" style="width: 100%;  overflow:auto">
+            <th:block th:each="jobPost: ${posts}">
+                <div class="card">
+                    <div class="card inner-card">
+                        <div style="display: flex; justify-content: flex-start; width: 100%">
+                            <div style="display: flex; flex-direction: column; justify-content: flex-start; width: 80%">
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                <div class="card-text" style="height: 50px; overflow: hidden">
-                                                    <p th:text="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
-                                                </div>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <a th:href="@{'posts/' + ${jobPost.id} + '/update'}">
+                                                <div class=" text-capitalize"
+                                                     th:text="${jobPost.title.toLowerCase()}"></div>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label for="applied_date">Applied Date</label>
-                                                <div id="applied_date"
-                                                     th:text="${jobPost.getApplied_Date_String()}"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label for="interview_date">Interview Date</label>
-                                                <div id="interview_date"
-                                                     th:text="${jobPost.interview_date} ? ${jobPost.getInterview_Date_String()} : ' '"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label for="thank_you_sent">Thank you sent</label>
-                                                <div id="thank_you_sent"
-                                                     th:text="${jobPost.thank_you_sent} ?${jobPost.getThank_you_String()}:''"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label for="check_status">Check Status</label>
-                                                <div id="check_status"
-                                                     th:text="${jobPost.check_status}?${jobPost.getCheck_Status_String()}: ''"></div>
-                                            </div>
+                                    <div class="col-4">
+                                        <label>Company</label>
+                                        <div class=" text-capitalize"
+                                             th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Notified Date</label>
+                                            <div id="notified_date"
+                                                 th:text="${jobPost.getNotified_Date_String()}"></div>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div id="buttons"
-                                     style="display: flex; flex-direction: column; justify-content: space-between">
-                                    <div style="margin: 1em;">
-                                        <form th:action="'/posts/' + ${jobPost.id} + '/update'" method="get">
-                                            <input class="btn btn-warning btn-sm" type="submit" value="Update">
-                                        </form>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <div class="card-text" style="height: 50px; overflow: hidden">
+                                                <p th:text="${#strings.replace(jobPost.getDescription(), newLineChar, '&lt;br /&gt;')}"></p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style="margin: 1em;">
-                                        <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="post">
-                                            <input class="btn btn-danger btn-sm" type="submit" value="Delete">
-                                        </form>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Post url</label>
+                                            <a th:href="${jobPost.getPost_url()}" target="_blank"><span
+                                                    th:text="${jobPost.getPost_url()}"></span></a>
+                                            <!--                                                </div>-->
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="applied_date">Applied Date</label>
+                                            <div id="applied_date"
+                                                 th:text="${jobPost.getApplied_Date_String()}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="interview_date">Interview Date</label>
+                                            <div id="interview_date"
+                                                 th:text="${jobPost.interview_date} ? ${jobPost.getInterview_Date_String()} : ' '"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="thank_you_sent">Thank you sent</label>
+                                            <div id="thank_you_sent"
+                                                 th:text="${jobPost.thank_you_sent} ?${jobPost.getThank_you_String()}:''"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="check_status">Check Status</label>
+                                            <div id="check_status"
+                                                 th:text="${jobPost.check_status}?${jobPost.getCheck_Status_String()}: ''"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="buttons"
+                                 style="display: flex; flex-direction: column; justify-content: space-between">
+                                <div style="margin: 1em;">
+                                    <form th:action="'/posts/' + ${jobPost.id} + '/update'" method="get">
+                                        <input class="btn btn-warning btn-sm" type="submit" value="Update">
+                                    </form>
+                                </div>
+                                <div style="margin: 1em;">
+                                    <form th:action="'/posts/' + ${jobPost.id} + '/delete'" method="post">
+                                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </th:block>
-            </div>
+                </div>
+            </th:block>
         </div>
-<!--        <div style=" background-color: #6f42c1; display: flex; flex-direction: row; justify-content: flex-start">-->
-            <div id="creditPhoto" class="credit_photo footer" >
-                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
-                   href="https://unsplash.com/@hope_house_press_leather_diary_studio?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
-                   target="_blank" rel="noopener noreferrer"
-                   title="Download free do whatever you want high-resolution photos from Hope House Press - Leather Diary Studio"><span
-                        style="display:inline-block;padding:2px 3px;"><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:#ffffff"
-                        viewBox="0 0 32 32"><title>unsplash-logo</title><path
-                        d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
-                        style="display:inline-block;padding:2px 3px">Hope House Press - Leather Diary Studio</span></a>
-            </div>
-<!--        </div>-->
     </div>
+    <!--        <div style=" background-color: #6f42c1; display: flex; flex-direction: row; justify-content: flex-start">-->
+    <div id="creditPhoto" class="credit_photo footer">
+        <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+           href="https://unsplash.com/@hope_house_press_leather_diary_studio?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
+           target="_blank" rel="noopener noreferrer"
+           title="Download free do whatever you want high-resolution photos from Hope House Press - Leather Diary Studio"><span
+                style="display:inline-block;padding:2px 3px;"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:#ffffff"
+                viewBox="0 0 32 32"><title>unsplash-logo</title><path
+                d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
+                style="display:inline-block;padding:2px 3px">Hope House Press - Leather Diary Studio</span></a>
+    </div>
+    <!--        </div>-->
+</div>
 </div>
 <script>
     $('.split-lines').val().replace(/\n\r?/g, '<br />');
     "use strict";
 
     $(document).ready(function () {
-
+        // let totalPost = document.getElementById("totalPost").value();
+        // if (totalPost <= 1) {
+        //     document.getElementById('mainDiv').setAttribute('height', '100vh');
+        // } else {
+        //     document.getElementById('mainDiv').setAttribute('height', '100%');
+        // }
         let containerHeight = $("#mainDiv").height() - ($("#mainNav").height() + $("#creditPhoto").height());
         $("#postList").height(containerHeight);
         document.getElementById('postList').setAttribute('height', containerHeight + "px");

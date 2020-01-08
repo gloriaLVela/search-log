@@ -4,6 +4,7 @@ import com.codeup.blog.blog.models.Company;
 import com.codeup.blog.blog.models.JobPost;
 import com.codeup.blog.blog.models.User;
 import com.codeup.blog.blog.repositories.CompanyRepository;
+import com.codeup.blog.blog.repositories.PostRepository;
 import com.codeup.blog.blog.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,12 @@ public class CompanyController {
 
     private final CompanyRepository companyDao;
     private final UserRepository userDao;
+    private final PostRepository postDao;
 
-    public CompanyController(CompanyRepository companyDao, UserRepository userDao) {
+    public CompanyController(CompanyRepository companyDao, UserRepository userDao, PostRepository postDao) {
         this.companyDao = companyDao;
         this.userDao = userDao;
+        this.postDao = postDao;
     }
 
     @GetMapping("/companies")
@@ -86,6 +89,10 @@ public class CompanyController {
     @PostMapping("/company/{id}/delete")
     public String delete(@PathVariable long id) {
         Company currentCompany = companyDao.getOne(id);
+        List<JobPost> jobPostList = postDao.findAllByCompanyEquals(id);
+        while (!jobPostList.isEmpty()){
+            postDao.delete(jobPostList.get(0));
+        }
         companyDao.deleteById(id);
         return "redirect:/companies";
     }
