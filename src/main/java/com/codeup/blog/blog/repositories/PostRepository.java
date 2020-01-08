@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<JobPost, Long> {
     JobPost findByTitle(String title);
+    List<JobPost> findAllByCompanyEquals(Long company_id);
 }
 
 
