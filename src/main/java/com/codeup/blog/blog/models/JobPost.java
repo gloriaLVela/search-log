@@ -58,6 +58,12 @@ public class JobPost {
     @Column(name="timestamp", columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP")
     private Date time_stamp;
 
+    @Column(columnDefinition = "VARCHAR(2000)")
+    private String cover_url;
+
+    @Column(columnDefinition = "VARCHAR(2000)")
+    private String resume_url;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
@@ -256,6 +262,22 @@ public class JobPost {
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = dateFormat.format(date);
         return strDate;
+    }
+
+    public String getCover_url() {
+        return cover_url;
+    }
+
+    public void setCover_url(String cover_url) {
+        this.cover_url = cover_url;
+    }
+
+    public String getResume_url() {
+        return resume_url;
+    }
+
+    public void setResume_url(String resume_url) {
+        this.resume_url = resume_url;
     }
 }
 

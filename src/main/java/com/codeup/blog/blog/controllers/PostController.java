@@ -119,7 +119,11 @@ public class PostController {
                          @RequestParam String check_status,
                          @RequestParam(name = "interview_attendants", required = false) String interview_attendants,
                          @RequestParam String notes,
-                         @RequestParam String timeline
+                         @RequestParam String timeline,
+                         @RequestParam(name = "coverURL",
+                                 required = false) String coverURL,
+                         @RequestParam(name = "resumeURL",
+                                 required = false) String resumeURL
     ) {
 
         JobPost oldJobPost = postDao.getOne(id);
@@ -174,6 +178,8 @@ public class PostController {
         oldJobPost.setInterview_attendants(interview_attendants);
         oldJobPost.setNotes(notes);
         oldJobPost.setTimeline(timeline);
+        oldJobPost.setCover_url(coverURL);
+        oldJobPost.setResume_url(resumeURL);
         oldJobPost.setActive(true);
         postDao.save(oldJobPost);
         return "redirect:/myPosts";
