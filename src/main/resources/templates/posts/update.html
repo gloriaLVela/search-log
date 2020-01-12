@@ -51,7 +51,7 @@
                                 <div class="col-4">
                                     <div class="form-group" data-provide="datepicker">
                                         <label for="strNotified_date">Notified Date</label>
-                                        <input id="strNotified_date"  th:field="${post.notified_date}"
+                                        <input id="strNotified_date" th:field="${post.notified_date}"
                                                name="strNotified_date"
                                                class="form-control"
                                                type="date"
@@ -127,6 +127,26 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-around">
+                                        <input class="btn btn-success" type="BUTTON" value="Upload Cover"
+                                               id="pickCover" style="margin-bottom: 1em;">
+<!--                                        <button class="btn btn-warning" id="confirm-cover"-->
+<!--                                                style="margin-bottom: 1em;">Save Cover-->
+<!--                                        </button>-->
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-around">
+                                        <input class="btn btn-success" type="BUTTON" value="Upload Resume"
+                                               id="pickResume" style="margin-bottom: 1em;">
+<!--                                        <button class="btn btn-warning" id="confirm-resume"-->
+<!--                                                style="margin-bottom: 1em;">Save Resume-->
+<!--                                        </button>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="timeline">Timeline</label>
@@ -149,6 +169,8 @@
                             </div>
                             <input class="btn btn-warning" type="submit" value="Update">
                         </div>
+                        <input hidden th:name="coverURL" id="coverURL" value="">
+                        <input hidden th:name="resumeURL" id="resumeURL" value="">
                     </form>
                 </div>
             </div>
@@ -169,5 +191,76 @@
         </div>
     </div>
 </div>
+<!--FileStack Photo -->
+<script>
+    const client = filestack.init('ABY8V4s1ETM2L3jaW4V5ez');
+    var watermarkHandle = '';
+
+    const getPostId = () => {
+        return new Promise((resolve) => {
+            resolve({
+                postId: $('postId').innerText
+            })
+        });
+    };
+
+    $('#pickCover').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getPostId().then((response) => {
+            const userId = response.userId;
+            const apikey = 'ABY8V4s1ETM2L3jaW4V5ez';
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+                    //alert('response ' + response);
+                    //console.log(response);
+                    //Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    console.log(objJSON['url']);
+                    document.getElementById("coverURL").value = watermarkHandle;
+                    // document.getElementById("imgPicture").src = watermarkHandle;
+                    // var imageUrl =  watermarkHandle;
+                    // $("#imgPicture").css("background-image", "url(" + watermarkHandle + ")");
+                    // console.log(document.getElementById("imgPicture").value);
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+
+    $('#pickResume').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getPostId().then((response) => {
+            const userId = response.userId;
+            const apikey = 'ABY8V4s1ETM2L3jaW4V5ez';
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+                    //alert('response ' + response);
+                    //console.log(response);
+                    //Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    console.log(objJSON['url']);
+                    document.getElementById("resumeURL").value = watermarkHandle;
+                    // document.getElementById("imgPicture").src = watermarkHandle;
+                    // var imageUrl =  watermarkHandle;
+                    // $("#imgPicture").css("background-image", "url(" + watermarkHandle + ")");
+                    // console.log(document.getElementById("imgPicture").value);
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+</script>
 </body>
 </html>

@@ -74,7 +74,16 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="${jobPost.getCover_url()}" th:href="${jobPost.getCover_url()}"
+                                                  target="_blank">cover</a>
+                                    </div>
+                                    <div class="col-6">
+                                        Resume: <a href="${jobPost.getResume_url()}"
+                                                   th:href="${jobPost.getResume_url()}" target="_blank">resume</a>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
