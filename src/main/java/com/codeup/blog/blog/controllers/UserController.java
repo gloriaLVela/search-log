@@ -54,8 +54,6 @@ public class UserController {
 
     @GetMapping("/myPosts")
     public String displayProfile(Model viewModel) {
-//
-        System.out.println("myPosts");
 
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(loggedUser.toString());

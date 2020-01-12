@@ -66,6 +66,10 @@ public class PostController {
                          @RequestParam Long company_id,
                          @RequestParam String strApplied_date,
                          @RequestParam String strNotified_date,
+                         @RequestParam(name = "coverURL",
+                                 required = false) String coverURL,
+                         @RequestParam(name = "resumeURL",
+                                 required = false) String resumeURL,
                          Model vModel) {
 //        System.out.println("create");
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -89,6 +93,8 @@ public class PostController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        newJobPost.setCover_url(coverURL);
+        newJobPost.setResume_url(resumeURL);
         newJobPost.setTime_stamp(new Date());
         newJobPost.setActive(true);
         postDao.save(newJobPost);

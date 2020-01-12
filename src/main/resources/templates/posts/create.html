@@ -69,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -89,7 +90,29 @@
                                           th:required="required"/>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="d-flex justify-content-around">
+                                <div class="col-6">
+                                    <a href="" th:href="${cover_url}"
+                                       target="_blank" id="cover_url">Current cover</a>
+                                </div>
+                                <input class="btn btn-success" type="BUTTON" value="Upload Cover"
+                                       id="pickCover" style="margin-bottom: .5em;">
 
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex justify-content-around">
+                                <div class="col-6">
+                                    <a id="resume_url" href=""
+                                       th:href="*{resume_url}" target="_blank">Current resume</a>
+                                </div>
+                                <input class="btn btn-success" type="BUTTON" value="Upload Resume"
+                                       id="pickResume" style="margin-bottom: .5em;">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -101,7 +124,8 @@
                             </div>
                         </div>
                     </div>
-
+                    <input hidden th:name="coverURL" id="coverURL" value="">
+                    <input hidden th:name="resumeURL" id="resumeURL" value="">
                     <input type="submit" class="btn btn-success form-control"/>
                 </form>
             </div>
@@ -121,5 +145,67 @@
                 style="display:inline-block;padding:2px 3px">Jens Lelie</span></a>
     </div>
 </div>
+<!--FileStack Photo -->
+<script>
+    const client = filestack.init('ABY8V4s1ETM2L3jaW4V5ez');
+    var watermarkHandle = '';
+
+    const getPostId = () => {
+        return new Promise((resolve) => {
+            resolve({
+                postId: $('postId').innerText
+            })
+        });
+    };
+
+    $('#pickCover').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getPostId().then((response) => {
+            const userId = response.userId;
+            const apikey = 'ABY8V4s1ETM2L3jaW4V5ez';
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+                    ///Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    console.log(objJSON['url']);
+                    document.getElementById("coverURL").value = watermarkHandle;
+                    document.getElementById("cover_url").href = watermarkHandle;
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+
+    $('#pickResume').on('click', function () {
+        // user id taken from external source ie: your database, Facebook etc.
+        getPostId().then((response) => {
+            const userId = response.userId;
+            const apikey = 'ABY8V4s1ETM2L3jaW4V5ez';
+            const client = filestack.init(apikey);
+            const options = {
+                uploadInBackground: false,
+                onFileUploadFinished: (response) => {
+                    var objJSON = (response);
+
+                    //Sets the watermark handle to the handle of the first file in the result
+                    watermarkHandle = objJSON['url'];
+                    console.log(objJSON['url']);
+                    document.getElementById("resumeURL").value = watermarkHandle;
+                    document.getElementById("resume_url").href = watermarkHandle;
+                    return watermarkHandle;
+
+                }
+            };
+            const picker = client.picker(options);
+            picker.open();
+        });
+    });
+</script>
 </body>
 </html>

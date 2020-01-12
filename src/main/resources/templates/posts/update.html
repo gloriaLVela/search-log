@@ -129,20 +129,23 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="d-flex justify-content-around">
+                                        <div class="col-6">
+                                            <a href="${post.getCover_url()}" th:href="${post.getCover_url()}"
+                                               target="_blank" id="cover_url">Current cover</a>
+                                        </div>
                                         <input class="btn btn-success" type="BUTTON" value="Upload Cover"
-                                               id="pickCover" style="margin-bottom: 1em;">
-<!--                                        <button class="btn btn-warning" id="confirm-cover"-->
-<!--                                                style="margin-bottom: 1em;">Save Cover-->
-<!--                                        </button>-->
+                                               id="pickCover" style="margin-bottom: .5em;">
+
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="d-flex justify-content-around">
+                                        <div class="col-6">
+                                            <a id="resume_url" href="${post.getResume_url()}"
+                                               th:href="${post.getResume_url()}" target="_blank">Current resume</a>
+                                        </div>
                                         <input class="btn btn-success" type="BUTTON" value="Upload Resume"
-                                               id="pickResume" style="margin-bottom: 1em;">
-<!--                                        <button class="btn btn-warning" id="confirm-resume"-->
-<!--                                                style="margin-bottom: 1em;">Save Resume-->
-<!--                                        </button>-->
+                                               id="pickResume" style="margin-bottom: .5em;">
                                     </div>
                                 </div>
                             </div>
@@ -214,16 +217,11 @@
                 uploadInBackground: false,
                 onFileUploadFinished: (response) => {
                     var objJSON = (response);
-                    //alert('response ' + response);
-                    //console.log(response);
-                    //Sets the watermark handle to the handle of the first file in the result
+                    ///Sets the watermark handle to the handle of the first file in the result
                     watermarkHandle = objJSON['url'];
                     console.log(objJSON['url']);
                     document.getElementById("coverURL").value = watermarkHandle;
-                    // document.getElementById("imgPicture").src = watermarkHandle;
-                    // var imageUrl =  watermarkHandle;
-                    // $("#imgPicture").css("background-image", "url(" + watermarkHandle + ")");
-                    // console.log(document.getElementById("imgPicture").value);
+                    document.getElementById("cover_url").href = watermarkHandle;
                     return watermarkHandle;
 
                 }
@@ -243,16 +241,12 @@
                 uploadInBackground: false,
                 onFileUploadFinished: (response) => {
                     var objJSON = (response);
-                    //alert('response ' + response);
-                    //console.log(response);
+
                     //Sets the watermark handle to the handle of the first file in the result
                     watermarkHandle = objJSON['url'];
                     console.log(objJSON['url']);
                     document.getElementById("resumeURL").value = watermarkHandle;
-                    // document.getElementById("imgPicture").src = watermarkHandle;
-                    // var imageUrl =  watermarkHandle;
-                    // $("#imgPicture").css("background-image", "url(" + watermarkHandle + ")");
-                    // console.log(document.getElementById("imgPicture").value);
+                    document.getElementById("resume_url").href = watermarkHandle;
                     return watermarkHandle;
 
                 }
