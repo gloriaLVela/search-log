@@ -71,12 +71,9 @@ public class PostController {
                          @RequestParam(name = "resumeURL",
                                  required = false) String resumeURL,
                          Model vModel) {
-//        System.out.println("create");
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newJobPost.setUser(loggedUser);
-//        System.out.println("company_id = " + company_id);
         newJobPost.setCompany(companyDao.getOne(company_id));
-//        System.out.println("strApplied_date = " + strApplied_date);
         Date applied_date = null;
         try {
             applied_date = new SimpleDateFormat("yyyy-mm-dd").parse(strApplied_date);
