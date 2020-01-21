@@ -18,34 +18,41 @@
 <div style="display: flex; flex-direction:column; justify-content: flex-start; height: 100vh;">
     <div th:replace="fragments/navbar :: main-navbar"></div>
     <div class="container" style="width: 100%">
-            <div style="display: flex; flex-direction:column; align-content: space-around;">
-                <div class="card" style="margin-top: 4em; width:100%">
-                    <div class="card inner-card" >
-                        <div class="page-title">Add Company</div>
-                        <form th:action="@{/company/add}" th:method="post" th:object="${company}" >
-                            <input type="hidden" th:field="*{id}" id="postId">
-                            <input type="hidden" th:field="${userId}" id="userId">
-                            <div class="form-group">
-                                <label for="title">Name</label>
-                                <input id="title" th:field="*{name}" class="form-control" placeholder="title"
-                                       maxlength="255"
-                                       th:required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="information">Information</label>
-                                <textarea id="information" th:field="*{information}" class="form-control" placeholder="information"
-                                          th:required="required"/>
-                            </div>
+        <div style="display: flex; flex-direction:column; align-content: space-around;">
+            <div class="card" style="margin-top: 4em; width:100%">
+                <div class="card inner-card">
+                    <div class="page-title">Add Company</div>
+                    <form th:action="@{/company/add}" th:method="post" th:object="${company}">
+                        <input type="hidden" th:field="*{id}" id="postId">
+                        <input type="hidden" th:field="${userId}" id="userId">
+                        <div class="form-group">
+                            <label for="title">Name</label>
+                            <input id="title" th:field="*{name}" class="form-control" placeholder="title"
+                                   maxlength="255"
+                                   th:required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Name</label>
+                            <input id="website" th:field="*{website}" class="form-control" placeholder="title"
+                                   maxlength="255"
+                                   th:required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="information">Information</label>
+                            <textarea id="information" th:field="*{information}" class="form-control"
+                                      placeholder="information"
+                                      th:required="required"/>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="news">News</label>
-                                <textarea id="news" th:field="*{news}" class="form-control" placeholder="news"
-                                          th:required="required"/>
-                            </div>
-                            <input type="submit" class="btn btn-success form-control"/>
-                        </form>
-                    </div>
+                        <div class="form-group">
+                            <label for="news">News</label>
+                            <textarea id="news" th:field="*{news}" class="form-control" placeholder="news"
+                                      th:required="required"/>
+                        </div>
+                        <input type="submit" class="btn btn-success form-control"/>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
     <div class="d-flex align-items-start">

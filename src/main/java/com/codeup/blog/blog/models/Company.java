@@ -14,6 +14,9 @@ public class Company {
     private String name;
 
     @Column(columnDefinition = "TEXT")
+    private String website;
+
+    @Column(columnDefinition = "TEXT")
     private String information;
 
     @Column(columnDefinition = "TEXT")
@@ -28,8 +31,9 @@ public class Company {
 
     }
 
-    public Company(String name, String information, String news, User user) {
+    public Company(String name, String website, String information, String news, User user) {
         this.name = name;
+        this.website = website;
         this.information = information;
         this.news = news;
         this.user = user;
@@ -73,5 +77,13 @@ public class Company {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 }
