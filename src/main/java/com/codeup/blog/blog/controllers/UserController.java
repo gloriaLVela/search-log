@@ -1,7 +1,9 @@
 package com.codeup.blog.blog.controllers;
 
+import com.codeup.blog.blog.models.Company;
 import com.codeup.blog.blog.models.JobPost;
 import com.codeup.blog.blog.models.User;
+import com.codeup.blog.blog.repositories.CompanyRepository;
 import com.codeup.blog.blog.repositories.UserRepository;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,11 +26,12 @@ public class UserController {
 
 
     private final UserRepository userDao;
+    private final CompanyRepository companyDAO;
 
-
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
+    public UserController(PasswordEncoder passwordEncoder, UserRepository userDao, CompanyRepository companyDAO) {
         this.passwordEncoder = passwordEncoder;
+        this.userDao = userDao;
+        this.companyDAO = companyDAO;
     }
 
     @GetMapping("/register")
@@ -54,14 +57,13 @@ public class UserController {
 
     @GetMapping("/myPosts")
     public String displayProfile(Model viewModel) {
-
+        Company currentCompany;
         User loggedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(loggedUser.toString());
+//        System.out.println(loggedUser.toString());
         List<JobPost> jobPosts = userDao.getOne(loggedUser.getId()).getJobPosts();
         for (int index = jobPosts.size() - 1; index >= 0; index--) {
             if (jobPosts.get(index).isActive() == false) {
                 jobPosts.remove(index);
-
             }
         }
         viewModel.addAttribute("user", userDao.getOne(loggedUser.getId()));

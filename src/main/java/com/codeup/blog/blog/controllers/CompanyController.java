@@ -76,10 +76,12 @@ public class CompanyController {
     @PostMapping("/company/{id}/update")
     public String update(@PathVariable long id,
                          @RequestParam String name,
+                         @RequestParam String website,
                          @RequestParam String information,
                          @RequestParam String news) {
         Company oldCompany = companyDao.getOne(id);
         oldCompany.setName(name);
+        oldCompany.setWebsite(website);
         oldCompany.setInformation(information);
         oldCompany.setNews(news);
         companyDao.save(oldCompany);
