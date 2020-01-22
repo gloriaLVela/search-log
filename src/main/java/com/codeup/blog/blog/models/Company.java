@@ -13,7 +13,6 @@ public class Company {
 
     private String name;
 
-    @Column(columnDefinition = "TEXT")
     private String website;
 
     @Column(columnDefinition = "TEXT")

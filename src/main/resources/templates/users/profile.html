@@ -62,8 +62,9 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Company</label>
-                                        <div class=" text-capitalize"
-                                             th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
+                                         <a th:href="${jobPost.getCompany().getWebsite()}" href="${jobPost.getCompany().getWebsite()}" target="_blank">
+                                            <div class=" text-capitalize" th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
+                                        </a>
 
                                     </div>
                                     <div class="col-4">
