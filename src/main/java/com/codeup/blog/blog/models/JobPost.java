@@ -18,6 +18,8 @@ public class JobPost {
 
     private String title;
 
+    private String cover_exists;
+
     private boolean active;
 
     @Column(columnDefinition = "TEXT")
@@ -279,5 +281,13 @@ public class JobPost {
     public void setResume_url(String resume_url) {
         this.resume_url = resume_url;
     }
+
+    public String getCover_exists() {
+        if (this.cover_url != null && this.cover_url.length() > 0){
+            return "cover link";
+        }
+        return "";
+    }
+
 }
 

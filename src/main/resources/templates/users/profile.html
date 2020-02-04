@@ -62,8 +62,10 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Company</label>
-                                         <a th:href="${jobPost.getCompany().getWebsite()}" href="${jobPost.getCompany().getWebsite()}" target="_blank">
-                                            <div class=" text-capitalize" th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
+                                        <a th:href="${jobPost.getCompany().getWebsite()}"
+                                           href="${jobPost.getCompany().getWebsite()}" target="_blank">
+                                            <div class=" text-capitalize"
+                                                 th:text="${jobPost.getCompany().getName().toLowerCase()}"></div>
                                         </a>
 
                                     </div>
@@ -78,7 +80,9 @@
                                 <div class="row">
                                     <div class="col-6">
                                         Cover: <a href="${jobPost.getCover_url()}" th:href="${jobPost.getCover_url()}"
-                                                  target="_blank">cover link</a>
+                                                  target="_blank"><span class="caret"
+                                                                        th:text="${jobPost.getCover_exists()}"></span>
+                                    </a>
                                     </div>
                                     <div class="col-6">
                                         Resume: <a href="${jobPost.getResume_url()}"
@@ -156,7 +160,6 @@
             </th:block>
         </div>
     </div>
-    <!--        <div style=" background-color: #6f42c1; display: flex; flex-direction: row; justify-content: flex-start">-->
     <div id="creditPhoto" class="credit_photo footer">
         <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
            href="https://unsplash.com/@hope_house_press_leather_diary_studio?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
